@@ -15,8 +15,8 @@ class Command(BaseCommand):
         for i in range(100):
             movie = movies[i]
             exist = Movie.objects.filter(title = movie['title']).first()
-            if Movie.objects.filter(description = movie['plot']) != '':
-                pass
+            if 'plot' not in movie or not movie['plot']:
+                movie['plot'] = 'No description'
             if not exist:
                 Movie.objects.create(title = movie['title'],
                                      image = 'movie/images/default.jpg',
